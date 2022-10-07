@@ -1,4 +1,4 @@
-package com.b1a9idps.client.service.handler;
+package com.b1a9idps.client.externals.handler;
 
 import java.io.IOException;
 

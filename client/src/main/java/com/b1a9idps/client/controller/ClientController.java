@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.b1a9idps.client.exception.ServerRestTemplateException;
 import com.b1a9idps.client.response.ClientResponse;
 import com.b1a9idps.client.response.ErrorResponse;
-import com.b1a9idps.client.service.ServerService;
-import com.b1a9idps.client.service.response.ServerResponse;
+import com.b1a9idps.client.externals.service.ServerService;
+import com.b1a9idps.client.externals.response.ServerResponse;
 
 @RestController
 @RequestMapping("/client")

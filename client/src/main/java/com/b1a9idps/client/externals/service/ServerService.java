@@ -1,4 +1,4 @@
-package com.b1a9idps.client.service;
+package com.b1a9idps.client.externals.service;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -14,7 +14,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.b1a9idps.client.exception.ServerRestTemplateException;
 import com.b1a9idps.client.response.ErrorResponse;
-import com.b1a9idps.client.service.response.ServerResponse;
+import com.b1a9idps.client.externals.response.ServerResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Service
