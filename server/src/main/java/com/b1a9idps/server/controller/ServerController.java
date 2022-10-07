@@ -20,15 +20,10 @@ public class ServerController {
 
     @GetMapping
     public ServerResponse index(@RequestParam(value = "status_code", required = false) Optional<Integer> statusCode) {
-        if (statusCode.isEmpty()) {
-            return new ServerResponse(1, "name");
-        }
-
-        HttpStatus status = statusCode
-                .map(HttpStatus::resolve)
-                .orElseThrow();
-        if (status.isError()) {
-            throw new CustomException(status.getReasonPhrase(), status);
+        Optional<HttpStatus> status = statusCode.map(HttpStatus::resolve);
+        if (status.isPresent()) {
+            HttpStatus s = status.get();
+            throw new CustomException(s.getReasonPhrase(), s);
         } else {
             return new ServerResponse(1, "name");
         }
