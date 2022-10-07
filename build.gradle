@@ -2,10 +2,10 @@ group = 'com.b1a9idps'
 version = '0.0.1-SNAPSHOT'
 
 tasks.withType(JavaCompile) {
-	options.deprecation = true
+    options.deprecation = true
 }
 
 wrapper {
-	gradleVersion = "7.5"
-	distributionType = Wrapper.DistributionType.ALL
+    gradleVersion = "7.5"
+    distributionType = Wrapper.DistributionType.ALL
 }
