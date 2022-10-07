@@ -27,14 +27,14 @@ public class ClientController {
 
     @GetMapping("/default")
     public ResponseEntity<ClientResponse> defaultHandler(@RequestParam(value = "status_code", required = false) Optional<Integer> statusCode) throws ServerRestTemplateException {
-        ResponseEntity<ServerResponse> serverResponse = serverService.defaultHandlingGet(statusCode);
+        ResponseEntity<ServerResponse> serverResponse = serverService.defaultHandlerGet(statusCode);
         return ResponseEntity.status(serverResponse.getStatusCode())
                 .body(ClientResponse.newInstance(serverResponse.getBody()));
     }
 
     @GetMapping("/custom")
     public ResponseEntity<ClientResponse> customHandler(@RequestParam(value = "status_code", required = false) Optional<Integer> statusCode) throws ServerRestTemplateException {
-        ResponseEntity<ServerResponse> serverResponse = serverService.customHandlingGet(statusCode);
+        ResponseEntity<ServerResponse> serverResponse = serverService.customHandlerGet(statusCode);
 
         if (serverResponse.getStatusCode().isError()) {
             throw new ServerRestTemplateException(new ErrorResponse("custom handler error"), serverResponse.getStatusCode());

@@ -10,12 +10,12 @@ import com.b1a9idps.client.externals.handler.RestTemplateResponseErrorHandler;
 public class RestTemplateConfig {
 
     @Bean
-    public RestTemplateBuilder defaultHandlingRestTemplateBuilder() {
+    public RestTemplateBuilder defaultHandlerRestTemplateBuilder() {
         return new RestTemplateBuilder();
     }
 
     @Bean
-    public RestTemplateBuilder customHandlingRestTemplateBuilder() {
+    public RestTemplateBuilder customHandlerRestTemplateBuilder() {
         return new RestTemplateBuilder()
                 .errorHandler(new RestTemplateResponseErrorHandler());
     }
