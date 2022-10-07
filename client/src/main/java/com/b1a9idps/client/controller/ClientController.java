@@ -37,6 +37,7 @@ public class ClientController {
         ResponseEntity<ServerResponse> serverResponse = serverService.customHandlerGet(statusCode);
 
         if (serverResponse.getStatusCode().isError()) {
+            // 4xx, 5xxの場合、ResponseEntityのレスポンスボディは、new ServerResponse(null, null)となる
             throw new ServerRestTemplateException(new ErrorResponse("custom handler error"), serverResponse.getStatusCode());
         }
 

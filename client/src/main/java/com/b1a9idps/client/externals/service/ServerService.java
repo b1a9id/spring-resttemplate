@@ -35,6 +35,9 @@ public class ServerService {
         this.objectMapper = objectMapper;
     }
 
+    /**
+     * RestTemplateを使った通信のエラーハンドリングに {@link org.springframework.web.client.DefaultResponseErrorHandler} を利用
+     */
     public ResponseEntity<ServerResponse> defaultHandlerGet(Optional<Integer> statusCode) throws ServerRestTemplateException {
         var requestEntity = buildRequestEntity(statusCode);
 
@@ -52,6 +55,9 @@ public class ServerService {
         }
     }
 
+    /**
+     * RestTemplateを使った通信のエラーハンドリングに {@link com.b1a9idps.client.externals.handler.RestTemplateResponseErrorHandler} を利用
+     */
     public ResponseEntity<ServerResponse> customHandlerGet(Optional<Integer> statusCode) {
         var requestEntity = buildRequestEntity(statusCode);
 
