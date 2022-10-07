@@ -46,15 +46,14 @@ public class ServerService {
 
         try {
             return defaultHandlingRestTemplate.exchange(requestEntity, ServerResponse.class);
-        } catch (RestClientException e) {
-            if (e instanceof HttpStatusCodeException exception) {
-                try {
-                    var errorResponse = objectMapper.readValue(exception.getResponseBodyAsString(), ErrorResponse.class);
-                    throw new ServerRestTemplateException(errorResponse, exception.getStatusCode());
-                } catch (IOException ioException) {
-                    throw new ServerRestTemplateException("invalid response");
-                }
+        } catch (HttpStatusCodeException e) {
+            try {
+                var errorResponse = objectMapper.readValue(e.getResponseBodyAsString(), ErrorResponse.class);
+                throw new ServerRestTemplateException(errorResponse, e.getStatusCode());
+            } catch (IOException ioException) {
+                throw new ServerRestTemplateException("invalid response");
             }
+        } catch (RestClientException e) {
             throw new ServerRestTemplateException("error");
         }
     }
