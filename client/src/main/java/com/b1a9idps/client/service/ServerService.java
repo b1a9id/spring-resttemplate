@@ -36,13 +36,7 @@ public class ServerService {
     }
 
     public ResponseEntity<ServerResponse> defaultHandlingGet(Optional<Integer> statusCode) throws ServerRestTemplateException {
-        var builder = UriComponentsBuilder.fromPath(BASE_PATH);
-        if (statusCode.isPresent()) {
-            builder.queryParam("status_code", statusCode.get());
-        }
-        var uri = builder.toUriString();
-
-        var requestEntity = RequestEntity.get(uri).build();
+        var requestEntity = buildRequestEntity(statusCode);
 
         try {
             return defaultHandlingRestTemplate.exchange(requestEntity, ServerResponse.class);
@@ -56,5 +50,21 @@ public class ServerService {
         } catch (RestClientException e) {
             throw new ServerRestTemplateException("error");
         }
+    }
+
+    public ResponseEntity<ServerResponse> customHandlingGet(Optional<Integer> statusCode) {
+        var requestEntity = buildRequestEntity(statusCode);
+
+        return customHandlingRestTemplate.exchange(requestEntity, ServerResponse.class);
+    }
+
+    private RequestEntity<Void> buildRequestEntity(Optional<Integer> statusCode) {
+        var builder = UriComponentsBuilder.fromPath(BASE_PATH);
+        if (statusCode.isPresent()) {
+            builder.queryParam("status_code", statusCode.get());
+        }
+        var uri = builder.toUriString();
+
+        return RequestEntity.get(uri).build();
     }
 }

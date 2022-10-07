@@ -26,9 +26,19 @@ public class ClientController {
     }
 
     @GetMapping("/default")
-    public ResponseEntity<ClientResponse> index(@RequestParam(value = "status_code", required = false) Optional<Integer> statusCode) throws ServerRestTemplateException {
+    public ResponseEntity<ClientResponse> defaultHandler(@RequestParam(value = "status_code", required = false) Optional<Integer> statusCode) throws ServerRestTemplateException {
         ResponseEntity<ServerResponse> serverResponse = serverService.defaultHandlingGet(statusCode);
-        var builder = ResponseEntity.status(serverResponse.getStatusCode());
+        return ResponseEntity.status(serverResponse.getStatusCode())
+                .body(ClientResponse.newInstance(serverResponse.getBody()));
+    }
+
+    @GetMapping("/custom")
+    public ResponseEntity<ClientResponse> customHandler(@RequestParam(value = "status_code", required = false) Optional<Integer> statusCode) throws ServerRestTemplateException {
+        ResponseEntity<ServerResponse> serverResponse = serverService.customHandlingGet(statusCode);
+
+        if (serverResponse.getStatusCode().isError()) {
+            throw new ServerRestTemplateException(new ErrorResponse("custom handler error"), serverResponse.getStatusCode());
+        }
 
         return ResponseEntity.status(serverResponse.getStatusCode())
                 .body(ClientResponse.newInstance(serverResponse.getBody()));
