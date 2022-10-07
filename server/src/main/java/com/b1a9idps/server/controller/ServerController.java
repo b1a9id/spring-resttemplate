@@ -33,7 +33,7 @@ public class ServerController {
         } else if (status.is5xxServerError()) {
             throw new Exception5xx(status.getReasonPhrase(), status);
         } else {
-            throw new IllegalArgumentException();
+            return new ServerResponse(1, "name");
         }
     }
 
