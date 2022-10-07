@@ -13,16 +13,16 @@ import org.springframework.web.bind.annotation.RestController;
 import com.b1a9idps.server.exception.Exception4xx;
 import com.b1a9idps.server.exception.Exception5xx;
 import com.b1a9idps.server.response.ErrorResponse;
-import com.b1a9idps.server.response.SampleResponse;
+import com.b1a9idps.server.response.ServerResponse;
 
 @RestController
-@RequestMapping("/sample")
-public class SampleController {
+@RequestMapping("/server")
+public class ServerController {
 
     @GetMapping
-    public SampleResponse index(@RequestParam(value = "status_code", required = false) Optional<Integer> statusCode) {
+    public ServerResponse index(@RequestParam(value = "status_code", required = false) Optional<Integer> statusCode) {
         if (statusCode.isEmpty()) {
-            return new SampleResponse(1, "name");
+            return new ServerResponse(1, "name");
         }
 
         HttpStatus status = statusCode
